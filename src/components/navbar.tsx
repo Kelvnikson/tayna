@@ -1,5 +1,10 @@
 import { SignInButton, UserButton, useUser } from "@clerk/clerk-react";
-import { Authenticated, Unauthenticated, useMutation, useQuery } from "convex/react";
+import {
+  Authenticated,
+  Unauthenticated,
+  useMutation,
+  useQuery,
+} from "convex/react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../convex/_generated/api";
@@ -32,10 +37,20 @@ export function Navbar() {
                     to="/dashboard"
                     className="inline-flex items-center px-3.5 py-1.5 text-sm font-medium text-[#1D1D1F] bg-[#F5F5F7] hover:bg-[#E5E5E5] rounded-full transition-colors duration-200"
                   >
-                    <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    <svg
+                      className="w-4 h-4 mr-1.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      />
                     </svg>
-                    Dashboard
+                    Painel
                   </Link>
                   <UserButton afterSignOutUrl="/" />
                 </div>
@@ -46,7 +61,7 @@ export function Navbar() {
                     variant="default"
                     className="h-8 px-4 text-sm rounded-[14px] bg-[#0066CC] hover:bg-[#0077ED] text-white shadow-sm transition-all"
                   >
-                    Sign In
+                    Entrar
                   </Button>
                 </SignInButton>
               </Unauthenticated>

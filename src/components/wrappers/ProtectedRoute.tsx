@@ -13,7 +13,7 @@ function LoadingSpinner() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center space-y-4">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-        <p className="text-gray-600">Loading...</p>
+        <p className="text-gray-600">Carregando...</p>
       </div>
     </div>
   );
@@ -21,13 +21,13 @@ function LoadingSpinner() {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, isLoaded: isUserLoaded } = useUser();
-  
+
   // Only query if user is loaded and exists
   const userData = useQuery(
     api.users.getUserByToken,
-    isUserLoaded && user?.id ? { tokenIdentifier: user.id } : "skip"
+    isUserLoaded && user?.id ? { tokenIdentifier: user.id } : "skip",
   );
-  
+
   // Only query subscription if we have user data
   // Step 1: Wait for Clerk to initialize
   if (!isUserLoaded) {

@@ -15,46 +15,46 @@ import { useNavigate } from "react-router";
 const FEATURES = [
   {
     icon: <Heart className="w-6 h-6 text-rose-500" />,
-    title: "Health Metrics Tracking",
+    title: "Monitoramento de Métricas de Saúde",
     description:
-      "Monitor vital signs like blood pressure, glucose levels, and heart rate in real-time",
+      "Monitore sinais vitais como pressão arterial, níveis de glicose e frequência cardíaca em tempo real",
   },
   {
     icon: <Shield className="w-6 h-6 text-blue-500" />,
-    title: "Secure Patient Data",
+    title: "Dados de Pacientes Seguros",
     description:
-      "End-to-end encrypted patient information with role-based access controls",
+      "Informações de pacientes criptografadas de ponta a ponta com controles de acesso baseados em função",
   },
   {
     icon: <Calendar className="w-6 h-6 text-emerald-500" />,
-    title: "Appointment Scheduling",
+    title: "Agendamento de Consultas",
     description:
-      "Easily book and manage appointments with healthcare professionals",
+      "Marque e gerencie consultas com profissionais de saúde facilmente",
   },
   {
     icon: <MessageSquare className="w-6 h-6 text-amber-500" />,
-    title: "Secure Messaging",
+    title: "Mensagens Seguras",
     description:
-      "Encrypted communication between patients and healthcare providers",
+      "Comunicação criptografada entre pacientes e profissionais de saúde",
   },
 ] as const;
 
 const TESTIMONIALS = [
   {
     content:
-      "The patient monitoring platform has transformed how I manage my diabetes. I can track my glucose levels and share them instantly with my doctor, which has led to much better treatment outcomes.",
+      "A plataforma de monitoramento de pacientes transformou a forma como gerencio meu diabetes. Posso acompanhar meus níveis de glicose e compartilhá-los instantaneamente com meu médico, o que levou a resultados de tratamento muito melhores.",
     author: "Maria Rodriguez",
-    role: "Patient",
-    condition: "Type 2 Diabetes",
+    role: "Paciente",
+    condition: "Diabetes Tipo 2",
     image:
       "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1200&auto=format&fit=crop",
   },
   {
     content:
-      "As a cardiologist, this platform has revolutionized my practice. I can monitor my patients' heart rates remotely and intervene quickly when abnormalities are detected. The time saved on routine check-ups allows me to focus on critical cases.",
-    author: "Dr. James Chen",
-    role: "Cardiologist",
-    hospital: "Central Medical Center",
+      "Como cardiologista, esta plataforma revolucionou minha prática. Posso monitorar a frequência cardíaca dos meus pacientes remotamente e intervir rapidamente quando anomalias são detectadas. O tempo economizado em consultas de rotina me permite focar em casos críticos.",
+    author: "Dr. Carlos Silva",
+    role: "Cardiologista",
+    hospital: "Centro Médico Central",
     image:
       "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop",
   },
@@ -75,15 +75,15 @@ function App() {
             <div className="inline-flex items-center gap-2 rounded-[20px] bg-blue-500/10 px-4 py-2">
               <Heart className="h-4 w-4 text-blue-500" />
               <span className="text-sm font-medium text-blue-500">
-                Trusted by 10,000+ Patients & Providers
+                Confiado por mais de 10.000 pacientes e profissionais
               </span>
             </div>
             <h1 className="text-6xl font-semibold text-[#1D1D1F] tracking-tight max-w-[800px] leading-[1.1]">
-              Patient Monitoring Platform
+              Plataforma de Monitoramento de Pacientes
             </h1>
             <p className="text-xl text-[#86868B] max-w-[600px] leading-relaxed">
-              Connect patients and healthcare providers with real-time health
-              monitoring, secure messaging, and appointment scheduling.
+              Conecte pacientes e profissionais de saúde com monitoramento de
+              saúde em tempo real, mensagens seguras e agendamento de consultas.
             </p>
 
             {!isUserLoaded ? (
@@ -95,7 +95,7 @@ function App() {
                 <Unauthenticated>
                   <SignInButton mode="modal">
                     <Button className="h-12 px-8 text-base rounded-[14px] bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all">
-                      Get Started
+                      Começar Agora
                     </Button>
                   </SignInButton>
                 </Unauthenticated>
@@ -104,7 +104,7 @@ function App() {
                     onClick={() => navigate("/dashboard")}
                     className="h-12 px-8 text-base rounded-[14px] bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all"
                   >
-                    Go to Dashboard
+                    Ir para o Painel
                   </Button>
                 </Authenticated>
               </div>
@@ -135,11 +135,11 @@ function App() {
           <div className="py-24">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-semibold text-[#1D1D1F] mb-3">
-                How It Works
+                Como Funciona
               </h2>
               <p className="text-xl text-[#86868B]">
-                Our platform connects patients and healthcare providers
-                seamlessly
+                Nossa plataforma conecta pacientes e profissionais de saúde de
+                forma integrada
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -148,11 +148,11 @@ function App() {
                   <span className="text-xl font-bold text-blue-600">1</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-3">
-                  Register & Connect
+                  Cadastre-se e Conecte-se
                 </h3>
                 <p className="text-[#86868B]">
-                  Create your profile as a patient or healthcare provider and
-                  connect with your care team or patients
+                  Crie seu perfil como paciente ou profissional de saúde e
+                  conecte-se com sua equipe de cuidados ou pacientes
                 </p>
               </div>
               <div className="bg-white rounded-[20px] p-8 text-center">
@@ -160,11 +160,11 @@ function App() {
                   <span className="text-xl font-bold text-blue-600">2</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-3">
-                  Monitor Health Data
+                  Monitore Dados de Saúde
                 </h3>
                 <p className="text-[#86868B]">
-                  Track vital signs and health metrics in real-time with
-                  automated alerts for abnormal readings
+                  Acompanhe sinais vitais e métricas de saúde em tempo real com
+                  alertas automáticos para leituras anormais
                 </p>
               </div>
               <div className="bg-white rounded-[20px] p-8 text-center">
@@ -172,11 +172,11 @@ function App() {
                   <span className="text-xl font-bold text-blue-600">3</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-3">
-                  Communicate & Schedule
+                  Comunique-se e Agende
                 </h3>
                 <p className="text-[#86868B]">
-                  Message securely with your care team and schedule appointments
-                  when needed
+                  Envie mensagens com segurança para sua equipe de cuidados e
+                  agende consultas quando necessário
                 </p>
               </div>
             </div>
@@ -186,10 +186,11 @@ function App() {
           <div className="py-24">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-semibold text-[#1D1D1F] mb-3">
-                Trusted by patients and providers
+                Confiado por pacientes e profissionais
               </h2>
               <p className="text-xl text-[#86868B]">
-                See how our platform is improving healthcare outcomes.
+                Veja como nossa plataforma está melhorando os resultados de
+                saúde.
               </p>
             </div>
             <div className="space-y-24">
@@ -223,7 +224,7 @@ function App() {
                     <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden bg-[#F5F5F7]">
                       <img
                         src={testimonial.image}
-                        alt={`${testimonial.author}'s portrait`}
+                        alt={`Foto de ${testimonial.author}`}
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/10" />
@@ -238,11 +239,11 @@ function App() {
           <div className="py-24">
             <div className="rounded-[32px] bg-gradient-to-b from-blue-600 to-blue-700 p-16 text-center text-white">
               <h2 className="text-4xl font-semibold mb-4">
-                Ready to improve patient care?
+                Pronto para melhorar o cuidado com pacientes?
               </h2>
               <p className="text-xl mb-8 text-white/90">
-                Join thousands of healthcare providers and patients on our
-                platform.
+                Junte-se a milhares de profissionais de saúde e pacientes em
+                nossa plataforma.
               </p>
               <div className="flex items-center justify-center gap-5">
                 <Unauthenticated>
@@ -251,7 +252,7 @@ function App() {
                       variant="default"
                       className="h-12 px-8 text-base rounded-[14px] bg-white text-blue-600 hover:bg-white/90 transition-all"
                     >
-                      Get Started
+                      Começar Agora
                     </Button>
                   </SignInButton>
                 </Unauthenticated>
@@ -260,11 +261,11 @@ function App() {
                     onClick={() => navigate("/dashboard")}
                     className="h-12 px-8 text-base rounded-[14px] bg-white text-blue-600 hover:bg-white/90 transition-all"
                   >
-                    Go to Dashboard
+                    Ir para o Painel
                   </Button>
                 </Authenticated>
                 <Button className="h-12 px-8 text-base rounded-[14px] border-white/20 text-white hover:bg-white/10 group transition-all">
-                  Learn More
+                  Saiba Mais
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
                 </Button>
               </div>
