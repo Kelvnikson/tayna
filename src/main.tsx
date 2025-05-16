@@ -15,20 +15,20 @@ TempoDevtools.init();
 const basename = import.meta.env.BASE_URL;
 
 // Import your P Key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
+  throw new Error("Missing Publishable Key");
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-    <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-      <BrowserRouter basename={basename}>
-        <App />
-      </BrowserRouter>
-    </ConvexProviderWithClerk>
+      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+        <BrowserRouter basename={basename}>
+          <App />
+        </BrowserRouter>
+      </ConvexProviderWithClerk>
     </ClerkProvider>
   </React.StrictMode>,
 );

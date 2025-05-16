@@ -5,6 +5,18 @@ import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, User, Database, Clock, Shield } from "lucide-react";
+import { useState } from "react";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
+import { HealthMetricsDashboard } from "../components/health/HealthMetricsDashboard";
+import { PatientProfile } from "../components/profiles/PatientProfile";
+import { ProfessionalProfile } from "../components/profiles/ProfessionalProfile";
+import { AppointmentScheduling } from "../components/appointments/AppointmentScheduling";
+import { ChatInterface } from "../components/chat/ChatInterface";
 
 export default function Dashboard() {
   const { user } = useUser();
@@ -12,6 +24,7 @@ export default function Dashboard() {
     api.users.getUserByToken,
     user?.id ? { tokenIdentifier: user.id } : "skip",
   );
+  const [activeTab, setActiveTab] = useState("health");
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FBFBFD]">
@@ -24,200 +37,65 @@ export default function Dashboard() {
               Seu Painel
             </h1>
             <p className="text-xl text-[#86868B] max-w-[600px] leading-relaxed mb-8">
-              Visualize e gerencie suas informações de conta e dados de usuário
-              em um só lugar.
+              Visualize e gerencie suas informações de saúde em um só lugar.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Clerk User Data */}
-            <DataCard
-              title="Informações do Usuário Clerk"
-              icon={<User className="h-5 w-5 text-[#0066CC]" />}
-            >
-              <div className="space-y-2">
-                <DataRow label="Nome Completo" value={user?.fullName} />
-                <DataRow
-                  label="Email"
-                  value={user?.primaryEmailAddress?.emailAddress}
-                />
-                <DataRow label="ID do Usuário" value={user?.id} />
-                <DataRow
-                  label="Criado em"
-                  value={new Date(user?.createdAt || "").toLocaleDateString()}
-                />
-                <DataRow
-                  label="Email Verificado"
-                  value={
-                    user?.primaryEmailAddress?.verification.status ===
-                    "verified"
-                      ? "Sim"
-                      : "Não"
-                  }
-                />
-              </div>
-            </DataCard>
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
+            <TabsList className="grid grid-cols-4 mb-8">
+              <TabsTrigger
+                value="health"
+                className="data-[state=active]:bg-[#0066CC] data-[state=active]:text-white"
+              >
+                Métricas de Saúde
+              </TabsTrigger>
+              <TabsTrigger
+                value="profile"
+                className="data-[state=active]:bg-[#0066CC] data-[state=active]:text-white"
+              >
+                Perfil
+              </TabsTrigger>
+              <TabsTrigger
+                value="appointments"
+                className="data-[state=active]:bg-[#0066CC] data-[state=active]:text-white"
+              >
+                Consultas
+              </TabsTrigger>
+              <TabsTrigger
+                value="chat"
+                className="data-[state=active]:bg-[#0066CC] data-[state=active]:text-white"
+              >
+                Chat
+              </TabsTrigger>
+            </TabsList>
 
-            {/* Database User Data */}
-            <DataCard
-              title="Informações do Usuário no Banco de Dados"
-              icon={<Database className="h-5 w-5 text-[#0066CC]" />}
-            >
-              <div className="space-y-2">
-                <DataRow label="ID no Banco" value={userData?._id} />
-                <DataRow label="Nome" value={userData?.name} />
-                <DataRow label="Email" value={userData?.email} />
-                <DataRow
-                  label="ID do Token"
-                  value={userData?.tokenIdentifier}
-                />
-                <DataRow
-                  label="Última Atualização"
-                  value={
-                    userData?._creationTime
-                      ? new Date(userData._creationTime).toLocaleDateString()
-                      : undefined
-                  }
-                />
-              </div>
-            </DataCard>
+            <TabsContent value="health">
+              <HealthMetricsDashboard />
+            </TabsContent>
 
-            {/* Session Information */}
-            <DataCard
-              title="Sessão Atual"
-              icon={<Clock className="h-5 w-5 text-[#0066CC]" />}
-            >
-              <div className="space-y-2">
-                <DataRow
-                  label="Último Acesso"
-                  value={new Date(user?.lastSignInAt || "").toLocaleString()}
-                />
-                <DataRow
-                  label="Estratégia de Autenticação"
-                  value={user?.primaryEmailAddress?.verification.strategy}
-                />
-              </div>
-            </DataCard>
+            <TabsContent value="profile">
+              {userData?.userType === "professional" ? (
+                <ProfessionalProfile />
+              ) : (
+                <PatientProfile />
+              )}
+            </TabsContent>
 
-            {/* Additional User Details */}
-            <DataCard
-              title="Detalhes do Perfil"
-              icon={<Shield className="h-5 w-5 text-[#0066CC]" />}
-            >
-              <div className="space-y-2">
-                <DataRow label="Nome de Usuário" value={user?.username} />
-                <DataRow label="Nome" value={user?.firstName} />
-                <DataRow label="Sobrenome" value={user?.lastName} />
-                <DataRow
-                  label="Imagem de Perfil"
-                  value={user?.imageUrl ? "Disponível" : "Não Definida"}
-                />
-              </div>
-            </DataCard>
-          </div>
+            <TabsContent value="appointments">
+              <AppointmentScheduling />
+            </TabsContent>
 
-          {/* JSON Data Preview */}
-          <div className="mt-12">
-            <DataCard
-              title="Visualização de Dados Brutos"
-              className="bg-gradient-to-br from-[#F5F5F7] to-white"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-sm font-medium text-[#1D1D1F] mb-2">
-                    Dados do Usuário Clerk
-                  </h3>
-                  <pre className="bg-white/80 p-4 rounded-[14px] text-sm overflow-auto max-h-64 border border-[#E5E5EA]">
-                    {JSON.stringify(user, null, 2)}
-                  </pre>
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-[#1D1D1F] mb-2">
-                    Dados do Usuário no Banco
-                  </h3>
-                  <pre className="bg-white/80 p-4 rounded-[14px] text-sm overflow-auto max-h-64 border border-[#E5E5EA]">
-                    {JSON.stringify(userData, null, 2)}
-                  </pre>
-                </div>
-              </div>
-            </DataCard>
-          </div>
+            <TabsContent value="chat">
+              <ChatInterface />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
       <Footer />
     </div>
-  );
-}
-
-function DataCard({
-  title,
-  children,
-  icon,
-  className = "",
-}: {
-  title: string;
-  children: React.ReactNode;
-  icon?: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`bg-white rounded-[20px] shadow-sm p-6 transition-all hover:shadow-md ${className}`}
-    >
-      <div className="flex items-center gap-2 mb-4">
-        {icon && <div className="flex-shrink-0">{icon}</div>}
-        <h2 className="text-lg font-semibold text-[#1D1D1F]">{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function DataRow({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number | null | undefined;
-}) {
-  return (
-    <div className="flex justify-between py-2 border-b border-[#F5F5F7] last:border-0">
-      <span className="text-[#86868B]">{label}</span>
-      <span className="text-[#1D1D1F] font-medium">{value || "—"}</span>
-    </div>
-  );
-}
-
-function formatDate(timestamp: number | undefined) {
-  if (!timestamp) return "—";
-  return new Date(timestamp).toLocaleDateString();
-}
-
-function formatCurrency(amount: number | undefined, currency: string = "BRL") {
-  if (amount === undefined) return "—";
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: currency,
-  }).format(amount / 100);
-}
-
-function StatusBadge({ status }: { status: string | undefined }) {
-  const getStatusColor = (status: string | undefined) => {
-    switch (status) {
-      case "active":
-        return "bg-[#E3F2E3] text-[#1D8A1D]";
-      case "canceled":
-        return "bg-[#FFEAEA] text-[#D93025]";
-      default:
-        return "bg-[#F5F5F7] text-[#86868B]";
-    }
-  };
-
-  return (
-    <span
-      className={`px-3 py-1 rounded-[14px] text-sm font-medium ${getStatusColor(status)}`}
-    >
-      {status || "Sem status"}
-    </span>
   );
 }
